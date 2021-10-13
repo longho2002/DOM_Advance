@@ -43,18 +43,32 @@ document
     v.parentElement.removeChild(v);
   });
 
-v.style.backgroundColor = 'Orangered';
-console.log(getComputedStyle(v).color);
-console.log(getComputedStyle(v).width);
-document.documentElement.style.setProperty('--color-primary', 'blue');
-const logo = document.querySelector('.nav__logo');
-console.log(logo);
-console.log(logo.alt);
-console.log(logo.design);
-logo.alt = 'Beautiful minimalist logo';
-console.log(logo.getAttribute('designer'));
-logo.setAttribute('designer', 'Cozark');
-console.log(logo.scr);
+// v.style.backgroundColor = 'Orangered';
+// console.log(getComputedStyle(v).color);
+// console.log(getComputedStyle(v).width);
+// document.documentElement.style.setProperty('--color-primary', 'blue');
+// const logo = document.querySelector('.nav__logo');
+// console.log(logo);
+// console.log(logo.alt);
+// console.log(logo.design);
+// logo.alt = 'Beautiful minimalist logo';
+// console.log(logo.getAttribute('designer'));
+// logo.setAttribute('designer', 'Cozark');
+// console.log(logo.scr);
 
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const sec1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function (e) {
+  // cách 1
+  const s1 = sec1.getBoundingClientRect();
+  console.log('s1: ', s1.x, s1.y);
+  console.log('window: ', window.pageXOffset, window.pageYOffset);
+  window.scroll({
+    left: s1.x + window.pageXOffset,
+    top: s1.y + window.pageYOffset,
+    behavior: 'smooth',
+  });
+  // cách 2
+  //sec1.scrollIntoView({ behavior: 'smooth' });
+});
