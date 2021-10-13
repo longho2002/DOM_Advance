@@ -76,8 +76,13 @@ btnScrollTo.addEventListener('click', function (e) {
 document.querySelector('.nav__links').addEventListener('click', function (e) {
   e.preventDefault();
   if (e.target.classList.contains('nav__link')) {
+    // khong co dau cham
     const id = e.target.getAttribute('href');
-    console.log('id: ', id);
     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
   }
 });
+
+const h1 = document.querySelector('h1');
+console.log(h1.parentElement.children);
+console.log(h1.parentElement);
+console.log(h1.children);
