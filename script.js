@@ -8,7 +8,7 @@ const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 
-const openModal = function () {
+const openModal = function (e) {
   e.preventDefault();
   modal.classList.remove('hidden');
   overlay.classList.remove('hidden');
@@ -69,6 +69,15 @@ btnScrollTo.addEventListener('click', function (e) {
     top: s1.y + window.pageYOffset,
     behavior: 'smooth',
   });
-  // cách 2
+  // cách 2 apply with browser support ?? 🤣
   //sec1.scrollIntoView({ behavior: 'smooth' });
+});
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    console.log('id: ', id);
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
 });
