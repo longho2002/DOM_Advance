@@ -84,6 +84,24 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 
 const h1 = document.querySelector('h1');
 console.log(h1.parentElement.children);
-h1.closest('h1').style.background = 'red';
+//h1.closest('h1').style.background = 'red';
 console.log(h1.parentElement);
 console.log(h1.children);
+//h1.closest('.header').style.background = 'cyan';
+console.log(h1.childNodes);
+console.log(h1.children);
+
+const tab_con = document.querySelector('.operations__tab-container');
+const tab_op = document.querySelectorAll('.operations__tab');
+const tab_content = document.querySelectorAll('.operations__content');
+tab_con.addEventListener('click', function (e) {
+  const val = e.target.closest('.operations__tab');
+  if (!val) return;
+  tab_op.forEach(e => e.classList.remove('operations__tab--active'));
+  tab_content.forEach(e => e.classList.remove('operations__content--active'));
+
+  val.classList.add('operations__tab--active');
+  document
+    .querySelector(`.operations__content--${val.dataset.tab}`)
+    .classList.add('operations__content--active');
+});
