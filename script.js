@@ -136,7 +136,6 @@ const sectionAll = document.querySelectorAll('.section');
 
 const revealSection = function (entries, observer) {
   const [entry] = entries;
-  console.log(entry.target);
   if (!entry.isIntersecting) return;
   entry.target.classList.remove('section--hidden');
   observer.unobserve(entry.target);
@@ -151,3 +150,22 @@ sectionAll.forEach(function (section) {
   sectionObserver.observe(section);
   section.classList.add('section--hidden');
 });
+
+const imgTarget = document.querySelectorAll('img[data-src]');
+
+const loadImg = function (entries, observer) {
+  const [entry] = entries;
+  entry.target.src = entry.target.dataset.src;
+  entry.target.addEventListener('load', function (e) {
+    entry.target.classList.remove('lazy-img');
+  });
+  observer.unobserve(entry.target);
+};
+
+const imgObserve = new IntersectionObserver(loadImg, {
+  root: null,
+  threshold: 0.15,
+  rootMargin: '-200px',
+});
+
+imgTarget.forEach(e => imgObserve.observe(e));
