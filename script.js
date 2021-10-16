@@ -105,3 +105,21 @@ tab_con.addEventListener('click', function (e) {
     .querySelector(`.operations__content--${val.dataset.tab}`)
     .classList.add('operations__content--active');
 });
+
+const nav = document.querySelector('.nav');
+
+const changeProps = function (e) {
+  const val = e.target;
+  if (val.classList.contains('nav__link')) {
+    const nav_link = val.closest('.nav').querySelectorAll('.nav__link');
+    const logo = val.closest('.nav').querySelector('img');
+    nav_link.forEach(e => {
+      if (e !== val) e.style.opacity = this;
+    });
+    logo.style.opacity = this;
+  }
+};
+
+nav.addEventListener('mouseover', changeProps.bind(0.5));
+
+nav.addEventListener('mouseout', changeProps.bind(1));
