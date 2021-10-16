@@ -31,23 +31,23 @@ document.addEventListener('keydown', function (e) {
 });
 
 const header = document.querySelector('.header');
-console.log(document.getElementsByClassName('btn'));
-const v = document.createElement('div');
-v.classList.add('cookie-message');
-v.innerHTML = 'hello .<button class="btn btn--close-cookie">Got it!</button>';
-header.append(v);
+// console.log(document.getElementsByClassName('btn'));
+// const v = document.createElement('div');
+// v.classList.add('cookie-message');
+// v.innerHTML = 'hello .<button class="btn btn--close-cookie">Got it!</button>';
+// header.append(v);
 
-document
-  .querySelector('.btn--close-cookie')
-  .addEventListener('click', function (e) {
-    v.parentElement.removeChild(v);
-  });
+// document
+//   .querySelector('.btn--close-cookie')
+//   .addEventListener('click', function (e) {
+//     v.parentElement.removeChild(v);
+//   });
 
 // v.style.backgroundColor = 'Orangered';
 // console.log(getComputedStyle(v).color);
 // console.log(getComputedStyle(v).width);
 // document.documentElement.style.setProperty('--color-primary', 'blue');
-// const logo = document.querySelector('.nav__logo');
+const logo = document.querySelector('.nav__logo');
 // console.log(logo);
 // console.log(logo.alt);
 // console.log(logo.design);
@@ -123,3 +123,31 @@ const changeProps = function (e) {
 nav.addEventListener('mouseover', changeProps.bind(0.5));
 
 nav.addEventListener('mouseout', changeProps.bind(1));
+
+let beforeY = window.screenY;
+window.addEventListener('scroll', function (e) {
+  if (window.scrollY < beforeY) {
+    nav.classList.add('sticky');
+  } else nav.classList.remove('sticky');
+  beforeY = window.scrollY;
+});
+
+const sectionAll = document.querySelectorAll('.section');
+
+const revealSection = function (entries, observer) {
+  const [entry] = entries;
+  console.log(entry.target);
+  if (!entry.isIntersecting) return;
+  entry.target.classList.remove('section--hidden');
+  observer.unobserve(entry.target);
+};
+
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15,
+});
+
+sectionAll.forEach(function (section) {
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
+});
